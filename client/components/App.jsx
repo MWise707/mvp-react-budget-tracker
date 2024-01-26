@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from "react";
+import Budget from "./Budget.jsx";
+import Header from "./Header.jsx";
 
 const App = () => {
-  const [tasks, setTasks] = useState([]);
+  const [categories, setcategories] = useState([]);
 
   useEffect(() => {
-    fetch("/api/tasks")
+    fetch("/api/categories")
       .then((res) => res.json())
-      .then((tasks) => {
-        setTasks(tasks);
+      .then((categories) => {
+        setcategories(categories);
       });
   }, []);
 
   return (
     <main>
-      {tasks.map((task) => (
-        <span className="task" key={task.id}>
-          {task.description}
-        </span>
-      ))}
+      <Header />
+      <Budget categories={categories} />
     </main>
   );
 };

@@ -8,12 +8,15 @@
   ],
   "scripts": {
     "dev": "concurrently \"npm:dev:*\"",
-    "dev:client": "npm run dev --workspace=client",
+    "dev:client": "npm run dev --workspace=client && react-scripts start",
     "dev:server": "npm run dev --workspace=server",
     "lint": "prettier . --check"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.17",
     "concurrently": "^7.1.0",
-    "prettier": "^2.8.8"
+    "postcss": "^8.4.33",
+    "prettier": "^2.8.8",
+    "tailwindcss": "^3.4.1"
   }
 }
