@@ -1,6 +1,10 @@
-const Header = () => (
+import Title from "./Title.jsx";
+import Tabs from "./Tabs.jsx";
+
+const Header = ({ currentTab }) => (
   <>
-    <h1 className="text-3xl font-bold underline">Hello world!</h1>
+    <Title />
+    <Tabs currentTab={currentTab}/>
   </>
 );
 

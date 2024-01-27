@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Budget from "./Budget.jsx";
 import Header from "./Header.jsx";
+import Footer from "./Footer.jsx";
 
 const App = () => {
   const [categories, setcategories] = useState([]);
@@ -13,10 +14,13 @@ const App = () => {
       });
   }, []);
 
+  const [currentTab, setTab] = useState('Planned');
+
   return (
     <main>
-      <Header />
-      <Budget categories={categories} />
+      <Header currentTab={currentTab}/>
+      <Budget categories={categories} currentTab={currentTab}/>
+      <Footer/>
     </main>
   );
 };
