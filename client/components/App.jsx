@@ -14,13 +14,23 @@ const App = () => {
       });
   }, []);
 
-  const [currentTab, setTab] = useState('Planned');
+  /* Tab Functionality will share state with budget */
+  const [currentTab, setTab] = useState("Planned");
+  const changeTabs = (tab) => {
+    console.log("Running App level Function: changeTabs to", tab);
+    setTab(tab);
+  };
+  const tabOptions = ["Planned", "Spent", "Progress"];
 
   return (
     <main>
-      <Header currentTab={currentTab}/>
-      <Budget categories={categories} currentTab={currentTab}/>
-      <Footer/>
+      <Header
+        currentTab={currentTab}
+        handleTabSeletion={changeTabs}
+        tabOptions={tabOptions}
+      />
+      <Budget categories={categories} currentTab={currentTab} />
+      <Footer />
     </main>
   );
 };

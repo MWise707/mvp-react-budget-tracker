@@ -1,15 +1,14 @@
-const Tabs = () => {
-  const handleTab = (e) => {
-    console.log("Tab has been selected: " + e.target.textContent);
+const Tabs = ({ handleTabSeletion, tabOptions }) => {
+  const switchTab = (tab) => {
+    console.log("Tab has been selected: ", tab);
+    handleTabSeletion(tab);
   };
 
-  return (
-    <>
-      <div onClick={() => handleTab()}>Planned</div>
-      <div>Spent</div>
-      <div>Progress</div>
-    </>
-  );
+  return tabOptions.map((tab) => (
+    <div key={tab} onClick={() => switchTab(tab)}>
+      {tab}
+    </div>
+  ));
 };
 
 export default Tabs;
