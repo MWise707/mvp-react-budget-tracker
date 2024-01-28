@@ -15,10 +15,10 @@ const App = () => {
   }, []);
 
   /* Tab Functionality will share state with budget */
-  const [currentTab, setTab] = useState("Planned");
+  const [currentTab, setTab] = useState("planned");
   const changeTabs = (tab) => {
     console.log("Running App level Function: changeTabs to", tab);
-    setTab(tab);
+    setTab(tab.toLowerCase());
   };
   const tabOptions = ["Planned", "Spent", "Progress"];
 

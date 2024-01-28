@@ -1,8 +1,13 @@
-import Categories from "./Categories.jsx";
+import Table from "./Table.jsx";
+import Chart from "./Chart.jsx";
 
-const Budget = ({ categories }) => (
+const Budget = ({ categories, currentTab }) => (
   <>
-    <Categories categories={categories} />
+    {console.log(currentTab)}
+    <div className="Budget">
+    <Chart categories={categories} currentTab={currentTab}/>
+    <Table categories={categories} currentTab={currentTab} />
+    </div>
   </>
 );
 

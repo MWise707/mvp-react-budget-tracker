@@ -1,6 +1,6 @@
 const Footer = () => (
   <>
-    <h1 className="text-3xl font-bold underline">Copyright WiseApps</h1>
+    <h1 className="text-3xl font-bold underline">© WiseApps</h1>
   </>
 );
 
