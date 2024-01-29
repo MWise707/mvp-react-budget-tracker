@@ -3,6 +3,7 @@
 }
 
 .table {
+  background-color: rgb(168, 166, 164);
   display: block;
   overflow: hidden;
   table-layout: auto;
@@ -38,4 +39,10 @@
 
 .expand {
   width: 100%;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
 }

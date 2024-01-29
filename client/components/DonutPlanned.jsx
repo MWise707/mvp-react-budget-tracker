@@ -1,7 +1,8 @@
+import "./DonutPlanned.css";
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
 
-class Donut extends Component {
+class DonutPlanned extends Component {
   constructor(props) {
     super(props);
 
@@ -31,4 +32,4 @@ class Donut extends Component {
   }
 }
 
-export default Donut;
+export default DonutPlanned;

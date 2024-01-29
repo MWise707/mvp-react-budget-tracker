@@ -1,0 +1,8 @@
+.Tabs {
+  display: flex;
+  align-items: center;
+  width: 20vh;
+  flex-direction: row;
+  text-justify: center;
+  border-width: 3px;
+}

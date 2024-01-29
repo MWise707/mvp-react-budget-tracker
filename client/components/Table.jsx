@@ -34,8 +34,10 @@ const Table = ({ categories, currentTab }) => {
                   )}
                 </td>
                 <td className="actions">
-                  <BsFillTrashFill />
-                  <BsFillPencilFill />
+                  <>
+                    <BsFillPencilFill />
+                    <BsFillTrashFill />
+                  </>
                 </td>
               </tr>
             ))}

@@ -1,14 +1,20 @@
 import Table from "./Table.jsx";
-import Donut from "./Chart.jsx";
+// import DonutPlanned from "./DonutPlanned.jsx";
+import DonutSpent from "./DonutSpent.jsx";
 
-const Budget = ({ categories, currentTab }) => (
-  <>
-    {console.log(categories)}
-    <div className="Budget">
-      <Donut categories={categories} currentTab={currentTab} />
-      <Table categories={categories} currentTab={currentTab} />
-    </div>
-  </>
-);
+const Budget = ({ categories, currentTab }) => {
+
+  const handleEditClick = {
+
+  }
+  return (
+    <>
+      <div className="Budget">
+        <DonutSpent categories={categories} currentTab={currentTab} />
+        <Table categories={categories} currentTab={currentTab} />
+      </div>
+    </>
+  );
+};
 
 export default Budget;

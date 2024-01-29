@@ -17,6 +17,8 @@ const App = () => {
 
   /* Tab Functionality will share state with budget */
   const [currentTab, setTab] = useState("planned");
+  const [series, setSeries] = useState();
+
   const changeTabs = (tab) => {
     console.log("Running App level Function: changeTabs to", tab);
     setTab(tab.toLowerCase());
