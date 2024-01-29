@@ -1,12 +1,12 @@
 import Table from "./Table.jsx";
-import Chart from "./Chart.jsx";
+import Donut from "./Chart.jsx";
 
 const Budget = ({ categories, currentTab }) => (
   <>
-    {console.log(currentTab)}
+    {console.log(categories)}
     <div className="Budget">
-    <Chart categories={categories} currentTab={currentTab}/>
-    <Table categories={categories} currentTab={currentTab} />
+      <Donut categories={categories} currentTab={currentTab} />
+      <Table categories={categories} currentTab={currentTab} />
     </div>
   </>
 );

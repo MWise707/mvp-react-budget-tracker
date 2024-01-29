@@ -3,8 +3,6 @@ import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 import { MdOutlineRadioButtonUnchecked } from "react-icons/md";
 import { MdRadioButtonChecked } from "react-icons/md";
 
-//TODO Add ability to switch between planned / spent / progress
-
 const Table = ({ categories, currentTab }) => {
   const displayAmount = (category) => {
     if (currentTab === "planned") return category.planned;
@@ -27,7 +25,7 @@ const Table = ({ categories, currentTab }) => {
             {categories.map((category) => (
               <tr key={category.category_id}>
                 <td className="expand">{category.name}</td>
-                <td>{displayAmount(category)}</td>
+                <td>${displayAmount(category)}</td>
                 <td>
                   {category.isdiscretionary ? (
                     <MdRadioButtonChecked />
