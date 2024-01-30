@@ -7,8 +7,13 @@ export default {
   plugins: [react()],
   server: {
     proxy: {
-      "/api": `http://localhost:${process.env.PORT}`,
+      "/api":
+        process.env.NODE_ENV === "production"
+          ? DATABASE_URL
+          : `http://localhost:${process.env.PORT}`,
     },
   },
   cacheDir: "../node_modules/.vite",
 };
+
+// process.env.NODE_ENV === "production" ? "https://your-production-api.com" : `http://localhost:${process.env.PORT}`
