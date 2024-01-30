@@ -4,10 +4,11 @@ import dotenv from "dotenv";
 
 dotenv.config({ path: "../.env" });
 
-const { PORT, DATABASE_URL } = process.env;
+const { PORT, DATABASE_URL, DATABASE_URL_LOCAL, NODE_ENV } = process.env;
 
 const client = new pg.Client({
-  connectionString: DATABASE_URL,
+  connectionString:
+    NODE_ENV === "production" ? DATABASE_URL : DATABASE_URL_LOCAL,
 });
 
 await client.connect();
