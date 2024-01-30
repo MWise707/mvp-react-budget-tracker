@@ -13,7 +13,5 @@ export default {
           : `http://localhost:${process.env.PORT}`,
     },
   },
-  cacheDir: "../node_modules/.vite",
+  // cacheDir: "../node_modules/.vite",
 };
-
-// process.env.NODE_ENV === "production" ? "https://your-production-api.com" : `http://localhost:${process.env.PORT}`
