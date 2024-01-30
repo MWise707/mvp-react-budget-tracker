@@ -5,20 +5,25 @@
   padding: 1em;
   border-radius: 10px;
   width: 80vw;
+  height: 20vh;
   /* height: 40vh; */
 }
 
 .donut {
+  display: flex;
+  justify-content: center;
+  align-self: center;
   background-color: rgb(211, 198, 182);
   padding: 2em;
   box-shadow: theme("boxShadow.xl");
   border-radius: 10px;
   width: 78vw;
-  height: 38vh;
+  height: 18vh;
 }
 
 .chart {
   display: flex;
   height: 100vh;
   justify-content: center;
+  /* align-items: center; */
 }

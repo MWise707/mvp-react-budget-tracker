@@ -10,7 +10,9 @@
     "dev": "concurrently \"npm:dev:*\"",
     "dev:client": "npm run dev --workspace=client && react-scripts start",
     "dev:server": "npm run dev --workspace=server",
-    "lint": "prettier . --check"
+    "lint": "prettier . --check",
+    "build": "vite build",
+    "preview": "vite-preview"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.17",
