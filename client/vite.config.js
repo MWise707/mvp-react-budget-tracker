@@ -9,7 +9,7 @@ export default {
     proxy: {
       "/api":
         process.env.NODE_ENV === "production"
-          ? DATABASE_URL
+          ? process.env.DATABASE_URL
           : `http://localhost:${process.env.PORT}`,
     },
   },
