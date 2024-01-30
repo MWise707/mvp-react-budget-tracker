@@ -1,17 +1,32 @@
+import "./budget.css";
 import Table from "./Table.jsx";
-// import DonutPlanned from "./DonutPlanned.jsx";
-import DonutSpent from "./DonutSpent.jsx";
+import Donut from "./Donut.jsx";
+import Bar from "./Bar-chart.jsx";
+import { useState } from "react";
 
 const Budget = ({ categories, currentTab }) => {
-
-  const handleEditClick = {
-
-  }
+  const [isCatSelected, setIsCatSelected] = useState(false);
+  const handleEditCat = () => {
+    setIsCatSelected(true);
+    console.log("Edit has been selected");
+  };
+  const handleDeleteClick = () => {
+    console.log("Delete has been clicked");
+  };
   return (
     <>
       <div className="Budget">
-        <DonutSpent categories={categories} currentTab={currentTab} />
-        <Table categories={categories} currentTab={currentTab} />
+        {currentTab === "progress" ? (
+          <Bar categories={categories} currentTab={currentTab} />
+        ) : (
+          <Donut categories={categories} currentTab={currentTab} />
+        )}
+        {/* <Donut categories={categories} currentTab={currentTab} /> */}
+        <Table
+          categories={categories}
+          currentTab={currentTab}
+          handleEditCat={handleEditCat}
+        />
       </div>
     </>
   );

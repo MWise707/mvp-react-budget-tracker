@@ -1,8 +1,22 @@
-.Tabs {
+.tab-row {
   display: flex;
-  align-items: center;
-  width: 20vh;
+  justify-content: center;
+  align-content: space-evenly;
+  width: 80vw;
   flex-direction: row;
-  text-justify: center;
   border-width: 3px;
+}
+
+.tabs {
+  border-width: 1px;
+  border: solid;
+  border-radius: 10px;
+  padding: 0.45em;
+  margin: 0.5em;
+  font-size: x-large;
+  box-shadow: 0px 10px 10px #ccc;
+}
+
+.tabs:hover {
+  background-color: #eee;
 }

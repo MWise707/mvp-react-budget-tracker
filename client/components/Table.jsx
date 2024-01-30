@@ -3,22 +3,28 @@ import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 import { MdOutlineRadioButtonUnchecked } from "react-icons/md";
 import { MdRadioButtonChecked } from "react-icons/md";
 
-const Table = ({ categories, currentTab }) => {
+const Table = ({ categories, currentTab, handleEditCat }) => {
   const displayAmount = (category) => {
     if (currentTab === "planned") return category.planned;
     if (currentTab === "spent") return category.spent;
     return category.planned - category.spent;
   };
+
+  const editCategory = (categoryId) => {
+    console.log("Selected category id: ", categoryId);
+    handleEditCat();
+  };
+
   return (
     <>
       <div className="table-wrapper">
         <table className="table">
           <thead>
             <tr>
-              <th>Category</th>
-              <th>Amount</th>
-              <th>Discretionary</th>
-              <th>Actions</th>
+              <th>CATEGORY</th>
+              <th>{currentTab.toUpperCase()}</th>
+              <th>DISCRETIONARY</th>
+              <th>ACTIONS</th>
             </tr>
           </thead>
           <tbody>
@@ -35,7 +41,9 @@ const Table = ({ categories, currentTab }) => {
                 </td>
                 <td className="actions">
                   <>
-                    <BsFillPencilFill />
+                    <BsFillPencilFill
+                      onClick={() => editCategory(category.category_id)}
+                    />
                     <BsFillTrashFill />
                   </>
                 </td>

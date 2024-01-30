@@ -6,11 +6,17 @@ const Tabs = ({ handleTabSeletion, tabOptions }) => {
     handleTabSeletion(tab);
   };
 
-  return tabOptions.map((tab) => (
-    <div className="Tabs" key={tab} onClick={() => switchTab(tab)}>
-      {tab}
-    </div>
-  ));
+  return (
+    <>
+      <div className="tab-row">
+        {tabOptions.map((tab) => (
+          <div className="tabs" key={tab} onClick={() => switchTab(tab)}>
+            {tab}
+          </div>
+        ))}
+      </div>
+    </>
+  );
 };
 
 export default Tabs;

@@ -1,0 +1,21 @@
+.donut-wrapper {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(42, 40, 39);
+  padding: 1em;
+  border-radius: 10px;
+  width: 80vw;
+}
+
+.donut {
+  background-color: rgb(211, 198, 182);
+  padding: 2em;
+  box-shadow: theme("boxShadow.xl");
+  border-radius: 10px;
+  width: 78vw;
+}
+
+.chart {
+  display: flex;
+  justify-content: center;
+}

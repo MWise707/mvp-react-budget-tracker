@@ -1,4 +1,4 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -9,20 +9,11 @@
     padding: theme("spacing.6");
     box-shadow: theme("boxShadow.xl");
   }
-}
+} */
 
 * {
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
   font-family: Arial, Helvetica, sans-serif;
-}
-
-.Budget {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content:  center;
-  height: 100vh;
-  background-color: #e5e3dd;
 }
