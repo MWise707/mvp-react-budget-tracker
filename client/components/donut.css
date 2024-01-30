@@ -5,6 +5,7 @@
   padding: 1em;
   border-radius: 10px;
   width: 80vw;
+  /* height: 40vh; */
 }
 
 .donut {
@@ -13,9 +14,11 @@
   box-shadow: theme("boxShadow.xl");
   border-radius: 10px;
   width: 78vw;
+  height: 38vh;
 }
 
 .chart {
   display: flex;
+  height: 100vh;
   justify-content: center;
 }
