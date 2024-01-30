@@ -1,10 +1,10 @@
 .new-cat-form {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  background-color: blue;
-  margin: 1em;
+  background-color: rgb(42, 40, 39);
+  padding: 1em;
+  border-radius: 10px;
+  width: 80vw;
 }
 
 .form {
@@ -12,7 +12,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(168, 166, 164);
+  background-color: rgb(211, 198, 182);
+  padding: 2em;
+  box-shadow: theme("boxShadow.xl");
+  border-radius: 10px;
+  width: 78vw;
 }
 
 .form-row {
@@ -23,8 +27,21 @@
 
 .input {
   display: flex;
-  align-items: end;
-  justify-content: end;
+  align-items: flex-end;
+  justify-content: flex-end;
+  border-width: 1px;
+  border: solid;
+  border-radius: 10px;
+  padding: 0.45em;
+  margin: 0.5em;
+  font-size: medium;
+  box-shadow: 0px 10px 10px #ccc;
+}
+
+.submit {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
   border-width: 1px;
   border: solid;
   border-radius: 10px;

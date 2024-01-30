@@ -8,17 +8,43 @@ const App = () => {
   const [categories, setcategories] = useState([]);
   const [currentTab, setTab] = useState("planned");
   const [isNewCatSelected, setNewCatSelected] = useState(false);
-  const [series, setSeries] = useState();
+  const [newCategoryRequested, setNewCategoryRequested] = useState(false);
+  // const [series, setSeries] = useState();
+  const [newCategory, setNewCategory] = useState({});
   const tabOptions = ["Planned", "Spent", "Progress"];
+
+  const changeTabs = (tab) => {
+    console.log("Running App level Function: changeTabs to", tab);
+    setTab(tab.toLowerCase());
+  };
 
   const showNewCatForm = () => {
     console.log("Handle new category at app level");
     setNewCatSelected(true);
   };
 
-  const changeTabs = (tab) => {
-    console.log("Running App level Function: changeTabs to", tab);
-    setTab(tab.toLowerCase());
+  const addNewCategory = (userNewCat) => {
+    setNewCatSelected(false);
+    setNewCategoryRequested(true);
+    setNewCategory(userNewCat);
+  };
+
+  const addCatToDB = (newCategory) => {
+    const RequestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newCategory),
+    };
+
+    fetch("/api/categories", RequestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("New category added: ", data);
+        // how to re-render page
+      })
+      .catch((error) => {
+        console.error("Error adding new category", error);
+      });
   };
 
   useEffect(() => {
@@ -27,23 +53,14 @@ const App = () => {
       .then((categories) => {
         setcategories(categories);
       });
-  }, []);
+  }, [categories]);
 
-  // useEffect(
-  //   ({ name, planned, spent, isDiscretionary }) => {
-  //     const RequestOptions = {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ name, planned, spent, isDiscretionary }),
-  //     };
-  //     fetch("/api/categories", requestionOptions)
-  //       .then((response) => response.json())
-  //       .then((data) => console.log(data));
-  //   },
-  //   [categories]
-  // );
-
-  /* Tab Functionality will share state with budget */
+  // Check if newCategory has been requested and if newCategory exists
+  useEffect(() => {
+    if (newCategoryRequested && newCategory) {
+      addCatToDB(newCategory);
+    }
+  }, [newCategoryRequested, newCategory]);
 
   return (
     <main>
@@ -57,6 +74,7 @@ const App = () => {
         currentTab={currentTab}
         showNewCatForm={showNewCatForm}
         isNewCatSelected={isNewCatSelected}
+        addNewCategory={addNewCategory}
       />
       <Footer />
     </main>

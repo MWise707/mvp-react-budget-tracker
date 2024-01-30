@@ -11,6 +11,7 @@ const Budget = ({
   currentTab,
   showNewCatForm,
   isNewCatSelected,
+  addNewCategory,
 }) => {
   const [isCatSelected, setIsCatSelected] = useState(false);
 
@@ -33,7 +34,7 @@ const Budget = ({
         )}
         {/* <Donut categories={categories} currentTab={currentTab} /> */}
         {isNewCatSelected ? (
-          <NewCatForm />
+          <NewCatForm addNewCategory={addNewCategory} />
         ) : (
           <Table
             categories={categories}
