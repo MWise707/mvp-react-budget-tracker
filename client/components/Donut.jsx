@@ -19,11 +19,11 @@ const Donut = ({ categories, currentTab }) => {
       options: {
         labels: categoryLabels,
         title: { text: currentTab.toUpperCase() },
-        plotOptions: {
-          pie: {
-            customScale: 1.1,
-          },
-        },
+        // plotOptions: {
+        //   pie: {
+        //     customScale: 0.8,
+        //   },
+        // },
       },
       series: data,
     });

@@ -1,0 +1,27 @@
+.new-category {
+  /* background-color: rgb(35, 228, 218); */
+  background-color: rgb(168, 166, 164);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  /* height: 20vh; */
+}
+
+.button {
+  display: flex;
+  background-color: rgb(168, 166, 164);
+  justify-self: left;
+  align-self: flex-start;
+  border-width: 1px;
+  border: solid;
+  border-radius: 10px;
+  padding: 0.45em;
+  margin: 0.25em;
+  font-size: large;
+  box-shadow: 0px 10px 10px #ccc;
+}
+
+.button:hover {
+  background-color: #eee;
+}

@@ -48,6 +48,15 @@ app.post("/api/categories", (req, res) => {
     });
 });
 
+app.patch("/api/categories/:id", (req, res) => {
+  const { id } = req.params;
+  const { name, planned, spent, isDiscretionary } = req.body;
+  client.query(
+    "UPDATE categories SET name = COALESCE($2, name), planned = COALESCE($3, planned), spent = COALESCE($4, spent), isdicretionary = COALESCE($5, isdiscretionary) WHERE category_id = ($1)",
+    [id, name, planned, spent, isDiscretionary]
+  );
+});
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });

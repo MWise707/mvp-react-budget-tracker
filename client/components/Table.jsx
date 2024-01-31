@@ -42,7 +42,7 @@ const Table = ({ categories, currentTab, handleEditCat }) => {
                 <td className="actions">
                   <>
                     <BsFillPencilFill
-                      onClick={() => editCategory(category.category_id)}
+                      onClick={() => editCategory(category)}
                     />
                     <BsFillTrashFill />
                   </>

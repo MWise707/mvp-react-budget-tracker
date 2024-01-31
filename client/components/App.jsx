@@ -9,8 +9,11 @@ const App = () => {
   const [currentTab, setTab] = useState("planned");
   const [isNewCatSelected, setNewCatSelected] = useState(false);
   const [newCategoryRequested, setNewCategoryRequested] = useState(false);
-  // const [series, setSeries] = useState();
+  // const [updateRequested, setUpdateRequested] = useState(false);
+  const [idToUpdate, setidToUpdate] = useState(null);
   const [newCategory, setNewCategory] = useState({});
+  // TODO Patch route logic
+  const [updatedCategory, setUpdatedCategory] = useState({});
   const tabOptions = ["Planned", "Spent", "Progress"];
 
   const changeTabs = (tab) => {
@@ -47,6 +50,33 @@ const App = () => {
       });
   };
 
+  const handleUpdateCategory = (id, fieldsToEdit) => {
+    console.log("At app level- edit data: ", fieldsToEdit, id);
+    setidToUpdate(id);
+    setUpdatedCategory(fieldsToEdit);
+  };
+
+  const editCategory = (id, updatedCategory) => {
+    const RequestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedCategory),
+    };
+
+    fetch(`/api/categories/${id}`, RequestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Updated category", data);
+      })
+      .then(() => {
+        setUpdatedCategory({});
+        setidToUpdate(null);
+      })
+      .catch((error) => {
+        console.error("Error adding new category", error);
+      });
+  };
+
   useEffect(() => {
     fetch("/api/categories")
       .then((res) => res.json())
@@ -62,6 +92,12 @@ const App = () => {
     }
   }, [newCategoryRequested, newCategory]);
 
+  useEffect(() => {
+    if (idToUpdate) {
+      editCategory(idToUpdate, updatedCategory);
+    }
+  });
+
   return (
     <main>
       <Header
@@ -75,6 +111,7 @@ const App = () => {
         showNewCatForm={showNewCatForm}
         isNewCatSelected={isNewCatSelected}
         addNewCategory={addNewCategory}
+        handleUpdateCategory={handleUpdateCategory}
       />
       <Footer />
     </main>
