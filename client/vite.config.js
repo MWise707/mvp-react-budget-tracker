@@ -13,5 +13,5 @@ export default {
           : `http://localhost:${process.env.PORT}`,
     },
   },
-  // cacheDir: "../node_modules/.vite",
+  cacheDir: "../node_modules/.vite",
 };
