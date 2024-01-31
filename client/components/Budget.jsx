@@ -24,41 +24,53 @@ const Budget = ({
     console.log("Edit has been selected");
   };
 
+  const resetChartsOnSubmit = () => {
+    setIsCatSelected(false);
+  }
+
   const handleDeleteClick = () => {
     console.log("Delete has been clicked");
   };
 
-  const showForms = (isCatSelected, isNewCatSelected) => {
-    if (isCatSelected) {
+  const showForms = (
+    isCatSelected,
+    isNewCatSelected,
+    currentTab,
+    categories
+  ) => {
+    if (isNewCatSelected) {
       return <NewCatForm addNewCategory={addNewCategory} />;
-    } else if (isNewCatSelected) {
+    } else if (isCatSelected) {
       return (
         <UpdateCatForm
           handleUpdateCategory={handleUpdateCategory}
           categoryToUpdate={categoryToUpdate}
+          resetChartsOnSubmit={resetChartsOnSubmit}
         />
       );
     } else {
-      return (
-        <Table
-          categories={categories}
-          currentTab={currentTab}
-          handleEditCat={handleEditCat}
-        />
-      );
+      return showCharts(currentTab, categories);
+    }
+  };
+
+  const showCharts = (currentTab, categories) => {
+    if (currentTab === "progress") {
+      return <Bar categories={categories} currentTab={currentTab} />;
+    } else {
+      return <Donut categories={categories} currentTab={currentTab} />;
     }
   };
 
   return (
     <>
       <div className="Budget">
-        {currentTab === "progress" ? (
-          <Bar categories={categories} currentTab={currentTab} />
-        ) : (
-          <Donut categories={categories} currentTab={currentTab} />
-        )}
-        {/* <Donut categories={categories} currentTab={currentTab} /> */}
-        {showForms(isCatSelected, isNewCatSelected)}
+        {showForms(isCatSelected, isNewCatSelected, currentTab, categories)}
+        <Table
+          categories={categories}
+          currentTab={currentTab}
+          handleEditCat={handleEditCat}
+        />
+        {/* {showForms(isCatSelected, isNewCatSelected)} */}
         <NewCategory showNewCatForm={showNewCatForm} />
       </div>
     </>

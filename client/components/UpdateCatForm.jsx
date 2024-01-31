@@ -1,12 +1,16 @@
 import { useState } from "react";
 import "./UpdateCatForm.css";
 
-const UpdateCatForm = ({ handleUpdateCategory, categoryToUpdate }) => {
+const UpdateCatForm = ({
+  handleUpdateCategory,
+  categoryToUpdate,
+  resetChartsOnSubmit,
+}) => {
   const [updatedCategory, setupdatedCategory] = useState({
-    name: "",
-    planned: "",
-    spent: "",
-    isdiscretionary: false,
+    name: categoryToUpdate?.name || "",
+    planned: categoryToUpdate?.planned || "",
+    spent: categoryToUpdate?.spent || "",
+    isdiscretionary: categoryToUpdate?.isdiscretionary || false,
   });
 
   const recordUserInputs = (event, id) => {
@@ -22,55 +26,60 @@ const UpdateCatForm = ({ handleUpdateCategory, categoryToUpdate }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleUpdateCategory(updatedCategory);
+    handleUpdateCategory(categoryToUpdate.category_id, updatedCategory);
+    resetChartsOnSubmit();
   };
 
   return (
     <>
       <div className="new-cat-form">
         <form className="form">
+          Edit {categoryToUpdate.name}
           <div className="form-row">
-            <label htmlFor="name" className="label">
+            <label htmlFor="name-update" className="label">
               Category Name
             </label>
             <input
               className="input"
-              id="name"
+              id="name-update"
               type="text"
               onChange={(event) => recordUserInputs(event, "name")}
-              placeholder="e.g. Rent"
+              placeholder={categoryToUpdate?.name || ""}
             />
           </div>
           <div className="form-row">
-            <label htmlFor="planned" className="label">
+            <label htmlFor="planned-update" className="label">
               Planned expenditures:
             </label>
             <input
               className="input"
-              id="planned"
+              id="planned-update"
               type="number"
-              placeholder="e.g. 250"
+              placeholder={categoryToUpdate?.planned || ""}
               onChange={(event) => recordUserInputs(event, "planned")}
             />
           </div>
           <div className="form-row">
-            <label htmlFor="spent" className="label">
+            <label htmlFor="spent-update" className="label">
               Spent? If none: enter 0
             </label>
             <input
               className="input"
-              id="spent"
+              id="spent-update"
               type="number"
-              placeholder="e.g. 200"
+              placeholder={categoryToUpdate?.spent || ""}
               onChange={(event) => recordUserInputs(event, "spent")}
             />
           </div>
           <div className="form-row">
-            <label htmlFor="true">Select if discretionary spending: </label>
+            <label htmlFor="true-update">
+              Select if discretionary spending:{" "}
+            </label>
             <input
               className="input"
               type="radio"
-              id="true"
+              id="true-update"
+              checked={categoryToUpdate?.isdiscretionary || false}
               onChange={handleRadioChange}
             />
           </div>

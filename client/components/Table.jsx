@@ -10,9 +10,9 @@ const Table = ({ categories, currentTab, handleEditCat }) => {
     return category.planned - category.spent;
   };
 
-  const editCategory = (categoryId) => {
-    console.log("Selected category id: ", categoryId);
-    handleEditCat();
+  const editCategory = (category) => {
+    console.log("Selected category id: ", category.category_id);
+    handleEditCat(category);
   };
 
   return (
@@ -41,9 +41,7 @@ const Table = ({ categories, currentTab, handleEditCat }) => {
                 </td>
                 <td className="actions">
                   <>
-                    <BsFillPencilFill
-                      onClick={() => editCategory(category)}
-                    />
+                    <BsFillPencilFill onClick={() => editCategory(category)} />
                     <BsFillTrashFill />
                   </>
                 </td>

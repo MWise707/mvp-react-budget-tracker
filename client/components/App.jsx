@@ -64,17 +64,53 @@ const App = () => {
     };
 
     fetch(`/api/categories/${id}`, RequestOptions)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then((data) => {
         console.log("Updated category", data);
+        // Fetch updated data after the patch
+        fetch("/api/categories")
+          .then((res) => res.json())
+          .then((categories) => {
+            setcategories(categories);
+          })
+          .catch((error) => {
+            console.error("Error fetching categories", error);
+          });
       })
       .then(() => {
         setUpdatedCategory({});
         setidToUpdate(null);
+        setNewCatSelected(false);
+        setNewCatSelected(false);
       })
       .catch((error) => {
-        console.error("Error adding new category", error);
+        console.error("Error updating new category", error);
       });
+
+    // fetch(`/api/categories/${id}`, RequestOptions)
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error("HTTP error! Status: ${response.status}");
+    //     }
+    //     return response.json();
+    //   })
+    //   .then((data) => {
+    //     console.log("Updated category", data);
+    //   })
+    //   .then(() => {
+    //     setUpdatedCategory({});
+    //     setidToUpdate(null);
+    //     setNewCatSelected(false);
+    //     setNewCatSelected(false);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error updating new category", error);
+    //   });
   };
 
   useEffect(() => {
@@ -82,8 +118,11 @@ const App = () => {
       .then((res) => res.json())
       .then((categories) => {
         setcategories(categories);
+      })
+      .catch((error) => {
+        console.error("Error fetching categories", error);
       });
-  }, [categories]);
+  }, [categories, idToUpdate, updatedCategory]);
 
   // Check if newCategory has been requested and if newCategory exists
   useEffect(() => {
@@ -93,10 +132,10 @@ const App = () => {
   }, [newCategoryRequested, newCategory]);
 
   useEffect(() => {
-    if (idToUpdate) {
+    if (idToUpdate && Object.keys(updatedCategory).length > 0) {
       editCategory(idToUpdate, updatedCategory);
     }
-  });
+  }, [idToUpdate, updatedCategory]);
 
   return (
     <main>

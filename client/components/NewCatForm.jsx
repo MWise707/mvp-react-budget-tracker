@@ -28,6 +28,7 @@ const NewCatForm = ({ addNewCategory }) => {
     <>
       <div className="new-cat-form">
         <form className="form">
+          Add New Category
           <div className="form-row">
             <label htmlFor="name" className="label">
               Category Name
