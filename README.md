@@ -1,89 +1,98 @@
-# Full-Stack React Example
+# MVP-React-Budget
 
-This repo contains an example of a full-stack application with an express backend and a React frontend.
+Simple budget application with a useful and beautiful user interface including tables and charts to organize and display data.
 
-It uses vite as the module bundler and dotenv for configuration. It's organized as a mono-repo using [npm workspaces](https://docs.npmjs.com/cli/v7/using-npm/workspaces) which allows us to have our client and server in one repo.
+## Table of Contents
 
-> **Note**: When you run `npm install` at the root, it will install all dependencies listed in `package.json`, `server/package.json`, and `client/package.json`.
+- [Introduction](#introduction)
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Components](#components)
+- [Usage](#usage)
+- [API Endpoints](#api-endpoints)
+- [Contributing](#contributing)
+- [Acknowledgments](#acknowledgments)
+- [Original Wire Diagram](#wire-diagrams)
 
-## Customizing the Template
+## Introduction
 
-1. Create new repo using this one as a template.
-1. Pull that repo down.
+This is a full stack REACT application with both front end and back end functionality and design. It is a simple budget application that displays user defined categories with planned and spent amounts in a useful way with HTTP routes for adding, editing, and deleting categories.
 
-## Development Setup
+## Features
 
-1. Install dependencies: `npm install`
-1. Create your database: `createdb YOUR_DB`
-1. Update `./server/migration.sql` to the schema for your application.
-1. Run your migrations: `psql -f server/migration.sql YOUR_DB`
-1. Create your `.env` file: `cp .env.template .env`
-1. Add your info in `.env`
-1. Run the app: `npm run dev`
+- A table to show categories. This can display different dollar amounts based on the tabs at the top of the app.
+- Pie chart to show planned or spent dollar amounts.
+- Bar chart to show overall budget progress.
+- Dynamic forms for adding a category or editing existing categories.
 
-## Scripts
+## Getting Started
 
-**Root**
+Project is run with node and vite locally.
+https://github.com/MWise707/mvp-react-budget-tracker
 
-- `npm run dev` - Runs the API server and hosts your frontend assets.
-- `npm run dev:server` - Runs the API server in watch mode.
-- `npm run dev:client` - Hosts your frontend assets.
+### Prerequisites
 
-**/client**
+- node
+- express for server
+- vite for development environment
+- react
+- install dependencies using npm init and npm install
 
-- `npm run dev` - Hosts your assets.
-- `npm run build` - Builds your assets (mainly used in CI/CD).
+### Installation
 
-**/server**
+1. **Clone the repository:**
 
-- `npm run dev` - Runs the server in watch mode.
-- `npm run start` - Starts the server (mainly used when deploying).
+   ```zsh
+   git clone https://github.com/MWise707/mvp-react-budget-tracker
 
-## Deployment
+   ```
 
-To deploy this project on Render, you'll need to do the following:
+2. **Navigate to the project directory.**
+   ```zsh
+   cd mvp-react-budget
+   ```
+3. **Install dependencies**
+   ```zsh
+   npm install
+   ```
 
-1. Provision a Postgres database instance (you can also create a new database in an existing Postgres instance).
-1. Deploy your backend as a Web Service.
-1. Deploy your frontend assets as a Static Site.
+### Components
 
-### Provision Postgres Instance
+![Alt text](images/budget-components.png)
 
-If you have previously provisioned a Postgres instance in Render, you won't be able to create a new one. However, you can create a new database within the existing Postgres instance by following these steps:
+- App.jsx is the parent component for all others. It keeps track of state for categories (pulled from server through fetch and useEffect() hook), currentTab, and several other key variables through the useState() hook. These are passed down to other components through props.
+- Header contains the title and tabs components. The tabs component could easily have gone into the Budget component as well but works fine in the Header. Current Tab is tracked at App level and changes are passed up through a call back function back to App to allow dynamic rendering of different charts and columns based on which tab is selected.
+- Footer only contains some text. Both footer and header have similar styling to match and tie the application together.
+- The budget is contains 6 child components. The top half of the budget component changes dynamically. The planned donut chart is rendered by default. If a different tab is selected it switches to a spent donut chart or to the progress table. If one of categories is selected at the table level then the edit form or add category form is shown instead of charts. This logic is handled at the Budget level.
+- The Table element was started with a tutorial from Code Complete. URL listed in acknowledgements. I didn't add all of the functionality but this can be added later. I used event listeners onClick() to register and handle actions from the edit icons and delete icons.
+- There are two forms which are very similar. If I went back and refactored I would try to use the same component for both but with logic to handle edit versus add categories. Both pass data back up to the budget component through call back functions.
+- The new category button is a simple button that triggers the render for the NewCatForm.
 
-1. View your Postgres instance in Render.
-1. Copy the `External Database URL`.
-1. Run `psql <EXTERNAL_DATABASE_URL>`.
-1. Create your database: `CREATE DATABASE my_db`.
-1. Copy the `Internal Database URL` and replace the string after the final slash with the name of the database you created in the previous step. e.g. `postgres://my-user:lkf8ehg@f893hfg/my_postgres_5x9g` becomes `postgres://my-user:lkf8ehg@f893hfg/my_db`.
-1. Save that URL for the next step.
+## Usage
 
-### Create Web Service
+This project can be used as is for a simple budget application or can be expanded with more tables in the database to allow for lists of expenditures and more filtering of data.
 
-To deploy your backend, create a new Web Service in Render with the following options:
+## API Endpoints
 
-![](images/server-settings.png)
+The api endpoint is named /api/categories since the table in the database is named categories.
 
-> **Note**: The root directory is important since this is where our backend lives in this project structure.
+## Contributing
 
-When adding the `DATABASE_URL` environment variable, use the URL you saved from the previous step.
+I used a template from Galvanize to get started with the vite configuration and a shell for the server.
 
-### Create Static Site
+## Acknowledgments
 
-To deploy your frontend, create a new Static Site in Render with the following options:
+- I love the apex-react Charts library. It was very well documented and easy to customize for this project. https://apexcharts.com/react-chart-demos/pie-charts/
+- Code Complete: Simple react table tutorial https://www.youtube.com/watch?v=MINQoCSBmds&t=781s
+- Template from Galvanize & Danny Andrews for helping me troubleshoot: https://github.com/gSchool/mcsp-full-stack-react-template
+- Kevin Goble: Thanks for being an awesome instructor and for being so patient with the react lifecycle https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 
-![](images/client-settings.png)
+## Wire-diagrams
 
-There's one extra step which is to add a Redirect/Rewrite rule.
-
-1. Set the `Source` field to `/api/*`.
-1. For the `Destination` field, go to your Web Service and copy its public URL (e.g. `https://react-mvp-api-fthm.onrender.com`) and append `/api/*` to the end of it (e.g. `https://react-mvp-api-fthm.onrender.com/api/*`)
-1. Set the `Action` to `Rewrite`.
-
-![](images/rewrite-rule.png)
-
-This rule handles proxying API requests to the Static Site over to the Web Service, circumventing any CORS issues.
-
-### Deployment Debugging
-
-To test your deployment, start with testing your backend APIs to ensure you can get data from your database. Once that is established, open up your Static Site and look for any errors in the console.
+![Alt text](images/Wire-diagram-1.jpeg)
+![Alt text](images/Wire-diagram-2.jpeg)
+![Alt text](images/Wire-diagram-3.jpeg)
+![Alt text](images/Wire-diagram-4.jpeg)
+![Alt text](images/Wire-diagram-5.jpeg)
