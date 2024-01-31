@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./UpdateCatForm.css";
+import "./updateCatForm.css";
 
 const UpdateCatForm = ({
   handleUpdateCategory,
