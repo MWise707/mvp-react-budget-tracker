@@ -9,11 +9,10 @@ const App = () => {
   const [currentTab, setTab] = useState("planned");
   const [isNewCatSelected, setNewCatSelected] = useState(false);
   const [newCategoryRequested, setNewCategoryRequested] = useState(false);
-  // const [updateRequested, setUpdateRequested] = useState(false);
   const [idToUpdate, setidToUpdate] = useState(null);
   const [newCategory, setNewCategory] = useState({});
-  // TODO Patch route logic
   const [updatedCategory, setUpdatedCategory] = useState({});
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const tabOptions = ["Planned", "Spent", "Progress"];
 
   const changeTabs = (tab) => {
@@ -86,31 +85,47 @@ const App = () => {
         setUpdatedCategory({});
         setidToUpdate(null);
         setNewCatSelected(false);
-        setNewCatSelected(false);
       })
       .catch((error) => {
         console.error("Error updating new category", error);
       });
+  };
 
-    // fetch(`/api/categories/${id}`, RequestOptions)
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw new Error("HTTP error! Status: ${response.status}");
-    //     }
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     console.log("Updated category", data);
-    //   })
-    //   .then(() => {
-    //     setUpdatedCategory({});
-    //     setidToUpdate(null);
-    //     setNewCatSelected(false);
-    //     setNewCatSelected(false);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error updating new category", error);
-    //   });
+  // TODO Finish delete route
+  const deleteCategory = (category) => {
+    const shouldDelete = window.confirm(
+      "Are you sure you want to delete " + category.name + "?"
+    );
+
+    if (shouldDelete) {
+      const RequestOptions = {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      };
+
+      fetch(`/api/categories/${category.category_id}`, RequestOptions)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          // Assuming a successful response without a JSON body
+          console.log("Successful deletion");
+
+          // Fetch updated data after the delete
+          fetch("/api/categories")
+            .then((res) => res.json())
+            .then((categories) => {
+              setcategories(categories);
+            })
+            .catch((error) => {
+              console.error("Error fetching categories", error);
+            });
+        })
+        .catch((error) => {
+          console.error("Error deleting category", error);
+        });
+    }
   };
 
   useEffect(() => {
@@ -122,7 +137,7 @@ const App = () => {
       .catch((error) => {
         console.error("Error fetching categories", error);
       });
-  }, [categories, idToUpdate, updatedCategory]);
+  }, [categories, idToUpdate, updatedCategory, confirmDelete]);
 
   // Check if newCategory has been requested and if newCategory exists
   useEffect(() => {
@@ -151,6 +166,7 @@ const App = () => {
         isNewCatSelected={isNewCatSelected}
         addNewCategory={addNewCategory}
         handleUpdateCategory={handleUpdateCategory}
+        deleteCategory={deleteCategory}
       />
       <Footer />
     </main>

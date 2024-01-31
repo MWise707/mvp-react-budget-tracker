@@ -65,6 +65,29 @@ app.patch("/api/categories/:id", (req, res) => {
     });
 });
 
+app.delete("/api/categories/:id", (req, res, next) => {
+  const { id } = req.params;
+  client
+    .query("DELETE FROM categories WHERE category_id = $1", [id])
+    .then((data) => {
+      console.log("Deleted succssfully:", data);
+      res.status(200).send("Successfully removed Tech");
+    })
+    .catch((err) => {
+      console.error("Error removing category:", err.stack);
+      next(err);
+    });
+});
+
+app.get("/*", (req, res, next) => {
+  res.status(500).send("Bad Request- Not formatted correctly");
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Internal Server Error- Something went wrong");
+});
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });

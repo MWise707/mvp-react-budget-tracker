@@ -14,6 +14,7 @@ const Budget = ({
   isNewCatSelected,
   addNewCategory,
   handleUpdateCategory,
+  deleteCategory,
 }) => {
   const [isCatSelected, setIsCatSelected] = useState(false);
   const [categoryToUpdate, setCategoryToUpdate] = useState({});
@@ -26,7 +27,7 @@ const Budget = ({
 
   const resetChartsOnSubmit = () => {
     setIsCatSelected(false);
-  }
+  };
 
   const handleDeleteClick = () => {
     console.log("Delete has been clicked");
@@ -69,6 +70,7 @@ const Budget = ({
           categories={categories}
           currentTab={currentTab}
           handleEditCat={handleEditCat}
+          deleteCategory={deleteCategory}
         />
         {/* {showForms(isCatSelected, isNewCatSelected)} */}
         <NewCategory showNewCatForm={showNewCatForm} />

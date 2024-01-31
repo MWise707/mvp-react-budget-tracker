@@ -3,7 +3,7 @@ import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 import { MdOutlineRadioButtonUnchecked } from "react-icons/md";
 import { MdRadioButtonChecked } from "react-icons/md";
 
-const Table = ({ categories, currentTab, handleEditCat }) => {
+const Table = ({ categories, currentTab, handleEditCat, deleteCategory }) => {
   const displayAmount = (category) => {
     if (currentTab === "planned") return category.planned;
     if (currentTab === "spent") return category.spent;
@@ -13,6 +13,11 @@ const Table = ({ categories, currentTab, handleEditCat }) => {
   const editCategory = (category) => {
     console.log("Selected category id: ", category.category_id);
     handleEditCat(category);
+  };
+
+  const handleDeleteClick = (category) => {
+    console.log("Selected Delete on: ", category.name);
+    deleteCategory(category);
   };
 
   return (
@@ -42,7 +47,9 @@ const Table = ({ categories, currentTab, handleEditCat }) => {
                 <td className="actions">
                   <>
                     <BsFillPencilFill onClick={() => editCategory(category)} />
-                    <BsFillTrashFill />
+                    <BsFillTrashFill
+                      onClick={() => handleDeleteClick(category)}
+                    />
                   </>
                 </td>
               </tr>
